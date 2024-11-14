@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.FallDetection" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="android:windowBackground">@android:color/white</item> <!-- Set a background color -->
+    </style>
+</resources>

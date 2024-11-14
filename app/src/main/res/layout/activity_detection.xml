@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+
+    <Switch
+        android:id="@+id/switchToggleDetection"
+        android:layout_width="270dp"
+        android:layout_height="57dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="62dp"
+        android:text="Toggle Detection" />
+
+    <TextView
+        android:id="@+id/textViewPhoneNumber"
+        android:layout_width="372dp"
+        android:layout_height="49dp"
+        android:layout_below="@id/switchToggleDetection"
+        android:layout_marginTop="87dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewIP"
+        android:layout_width="372dp"
+        android:layout_height="49dp"
+        android:layout_below="@id/switchToggleDetection"
+        android:layout_marginTop="22dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="372dp"
+        android:layout_height="49dp"
+        android:text="Latitude: "
+        android:layout_below="@id/switchToggleDetection"
+        android:layout_marginTop="227dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="372dp"
+        android:layout_height="49dp"
+        android:text="Longitude: "
+        android:layout_below="@id/switchToggleDetection"
+        android:layout_marginTop="159dp"
+        android:textSize="16sp" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="395dp"
+        android:layout_height="329dp"
+        android:layout_below="@id/textViewPhoneNumber"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="19dp" />
+
+</RelativeLayout>

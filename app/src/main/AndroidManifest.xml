@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.BODY_SENSORS"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FallDetection"
+        tools:targetApi="31">
+
+        <!-- MainActivity: The launcher activity -->
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.FallDetection">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- MobileNumberActivity: For mobile number settings -->
+        <activity
+            android:name=".activity.MobileNumberActivity"
+            android:exported="false"
+            android:label="Mobile Number Settings" />
+
+        <!-- IpSettingActivity: For IP socket connection settings -->
+        <activity
+            android:name=".activity.IpSettingActivity"
+            android:exported="false"
+            android:label="IP Socket Connection" />
+
+        <!-- DetectionActivity: For fall detection functionality -->
+        <activity
+            android:name=".activity.DetectionActivity"
+            android:exported="false"
+            android:label="Detection" />
+
+        <activity
+            android:name=".activity.Socket2Socket"
+            android:exported="false"
+            android:label="Socket2Socket" />
+
+        <activity
+            android:name=".activity.GPSActivity"
+            android:exported="false"
+            android:label="GPSActivity"
+            android:screenOrientation="portrait"/>
+
+    </application>
+</manifest>
