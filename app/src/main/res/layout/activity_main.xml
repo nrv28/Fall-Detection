@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/backgroundColor">
+
+    <!-- Toggle Switch -->
+    <Switch
+        android:id="@+id/switchToggleDetection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Connect to Server"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="64dp" />
+
+    <!-- App Name TextView -->
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fall Detection App"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/primaryTextColor"
+        android:layout_marginBottom="40dp"
+        android:gravity="center" />
+
+    <!-- Button for Mobile Number Setting -->
+    <Button
+        android:id="@+id/btnMobileNumberSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Mobile Number"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/primaryButtonTextColor" />
+
+    <!-- Button for IP Setting -->
+    <Button
+        android:id="@+id/btnIpSetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set IP Address"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/primaryButtonTextColor" />
+
+    <!-- Button for Detection -->
+    <Button
+        android:id="@+id/btnDetection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detection"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/primaryButtonTextColor" />
+
+    <!-- Button for Socket2Socket -->
+    <Button
+        android:id="@+id/btnSocket2Socket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Socket 2 Socket"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/primaryButtonTextColor" />
+
+    <!-- Button for GPS -->
+    <Button
+        android:id="@+id/btnGPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/primaryButtonTextColor" />
+</LinearLayout>
