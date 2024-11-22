@@ -7,7 +7,7 @@ of a fall. Upon detecting a fall, the app sends an instant alert via socket comm
 designated contact person, along with the user's precise GPS location. Additionally, a local 
 audible alert is triggered on the device to further aid in seeking help. 
 
-![Screenshot 2024-05-30 012735](https://github.com/lovepathak1224/BLE/assets/155883684/25e68d23-4e75-4fe3-87ca-2d22efd81cb9)
+![Shots]([https://github.com/lovepathak1224/BLE/assets/155883684/25e68d23-4e75-4fe3-87ca-2d22efd81cb9](https://github.com/nrv28/Fall-Detection/blob/main/Resource/Shots.jpg))
 
 
 ## Key Features 
