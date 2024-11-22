@@ -7,7 +7,7 @@ of a fall. Upon detecting a fall, the app sends an instant alert via socket comm
 designated contact person, along with the user's precise GPS location. Additionally, a local 
 audible alert is triggered on the device to further aid in seeking help. 
 
-[![View Documentation](./Resource/Shots.png)](./Resource/Shots.png)
+[![View Documentation](./Resource/Shots.jpg)](./Resource/Shots.jpg)
 
 
 ## Key Features 
