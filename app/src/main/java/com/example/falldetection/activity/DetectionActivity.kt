@@ -27,6 +27,7 @@ import android.hardware.SensorManager
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
+import android.hardware.camera2.CameraManager
 import android.widget.Button
 import com.example.falldetection.R
 import com.google.android.gms.location.LocationServices
@@ -64,6 +65,11 @@ class DetectionActivity : AppCompatActivity(), SensorEventListener {
     private var isDetectionOn = false
     private lateinit var sensorManager: SensorManager
     private var accelerometer: Sensor? = null
+
+
+    private var activityState = "Standing" // To store the predicted activity
+    private val magnitudeValues = mutableListOf<Double>() // To track recent magnitudes for analysis
+    private val maxMagnitudeHistory = 10 // Size of history to smooth activity detection
 
     private var clientSocket: Socket? = null
     private var out: PrintWriter? = null
@@ -216,8 +222,58 @@ class DetectionActivity : AppCompatActivity(), SensorEventListener {
         val lineData = LineData(dataSetX, dataSetY, dataSetZ)
         lineChart.data = lineData
         lineChart.invalidate()
+
+
+        predictActivity(x, y, z)
     }
 
+
+    //Activity Prediction----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+    private fun predictActivity(x: Double, y: Double, z: Double) {
+        // Calculate the magnitude of the acceleration vector
+        val magnitude = Math.sqrt(x * x + y * y + z * z)
+
+        // Add magnitude to the history and maintain its size
+        magnitudeValues.add(magnitude)
+        if (magnitudeValues.size > maxMagnitudeHistory) {
+            magnitudeValues.removeAt(0)
+        }
+
+        // Analyze the magnitude to determine the activity
+        val avgMagnitude = magnitudeValues.average()
+        val variation = magnitudeValues.maxOrNull()?.minus(magnitudeValues.minOrNull() ?: 0.0) ?: 0.0
+
+        activityState = when {
+            avgMagnitude < 2.0 && variation < 0.7 -> "Standing"
+            avgMagnitude in 2.0..4.0 && variation in 0.7..2.0 -> "Walking"
+            avgMagnitude > 4.0 && variation > 2.0 -> "Running"
+            else -> "Still or Standing"
+        }
+
+        // Display the current activity state
+        updateActivityDisplay(activityState)
+    }
+
+    private fun updateActivityDisplay(activity: String) {
+        runOnUiThread {
+            Toast.makeText(this, "Current Activity: $activity", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+
+
+
+
+
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private fun detectFall(z: Double) {
         if (z - lastZ > threshold) {
             isFalling = true
@@ -235,6 +291,7 @@ class DetectionActivity : AppCompatActivity(), SensorEventListener {
     private fun handleFallDetected() {
         runOnUiThread {
             Toast.makeText(this, "Fall Detected!", Toast.LENGTH_SHORT).show()
+            startFlashingLight()
             startBeeping() // Start beeping for 10 seconds
 
             // Get the phone number
@@ -265,9 +322,41 @@ class DetectionActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    private fun startFlashingLight() {
+        val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        val cameraId = cameraManager.cameraIdList[0] // Get the first camera ID (usually back camera)
+        try {
+            // Flash the light at intervals
+            object : CountDownTimer(totalBeepDuration.toLong(), 500) { // Flash every 500ms
+                override fun onTick(millisUntilFinished: Long) {
+                    cameraManager.setTorchMode(cameraId, true) // Turn on the flashlight
+                    Thread.sleep(250) // Keep it on for 250ms
+                    cameraManager.setTorchMode(cameraId, false) // Turn off the flashlight
+                }
+
+                override fun onFinish() {
+                    cameraManager.setTorchMode(cameraId, false) // Ensure light is off at the end
+                }
+            }.start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error flashing light: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun stopFlashingLight() {
+        val cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+        val cameraId = cameraManager.cameraIdList[0]
+        try {
+            cameraManager.setTorchMode(cameraId, false) // Turn off the flashlight
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     private fun playBeepSound() {
-        val toneGenerator = ToneGenerator(AudioManager.STREAM_MUSIC, 30)
-        toneGenerator.startTone(ToneGenerator.TONE_CDMA_LOW_L, beepDuration)
+        val toneGenerator = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+        toneGenerator.startTone(ToneGenerator.TONE_DTMF_1, beepDuration)
     }
 
     private fun startBeeping() {

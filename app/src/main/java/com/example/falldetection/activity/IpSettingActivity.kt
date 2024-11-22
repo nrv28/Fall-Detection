@@ -43,11 +43,17 @@ class IpSettingActivity : AppCompatActivity() {
 
         // Scan QR Code to get the IP address
         btnScanQr.setOnClickListener {
+//            val integrator = IntentIntegrator(this)
+//            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+//            integrator.setPrompt("Scan a QR code containing the IP address")
+//            integrator.setCameraId(0)
+//            integrator.setOrientationLocked(true)
+//            integrator.initiateScan()
             val integrator = IntentIntegrator(this)
             integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
             integrator.setPrompt("Scan a QR code containing the IP address")
-            integrator.setCameraId(0)
             integrator.setOrientationLocked(true)
+            integrator.setCaptureActivity(CustomScannerActivity::class.java) // Set custom scanner
             integrator.initiateScan()
         }
     }
